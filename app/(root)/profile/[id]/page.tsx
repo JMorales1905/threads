@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
 async function Page({ params }: { params: { id: string } }) {
+    // checks if user exists
     const user = await currentUser();
-
     if (!user) return null;
 
+    // checks if user is onboarded
     const userInfo = await fetchUser(params.id);
-
     if (!userInfo?.onboarded) redirect('/onboarding');
     return (
         <section>
